@@ -1,0 +1,73 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="sp.fr.conference.MesConferencesFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mes Conferences"
+            android:padding="5dp"
+            android:layout_gravity="top"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewMesConferences"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="13"
+                android:padding="5dp" />
+
+            <ImageView
+                android:id="@+id/changeButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:contentDescription="change conf"
+                android:onClick="onChange"
+                android:padding="0dp"
+                android:scaleType="fitCenter"
+                android:src="@android:drawable/ic_menu_edit" />
+
+            <ImageView
+                android:id="@+id/deleteButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="3dp"
+                android:layout_weight="1"
+                android:contentDescription="delete conf"
+                android:onClick="onDelete"
+                android:padding="0dp"
+                android:scaleType="fitCenter"
+                android:src="@android:drawable/ic_delete" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/addNewConfButton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="3dp"
+        android:contentDescription="add new conf"
+        android:onClick="onAddNewConf"
+        android:padding="0dp"
+        android:scaleType="fitCenter"
+        android:layout_gravity="bottom"
+        android:src="@android:drawable/ic_input_add" />
+
+
+</FrameLayout>

@@ -102,7 +102,6 @@ public class AdministratorFragment extends Fragment  implements View.OnClickList
                                                           NewOrUpdateStatue = false;
                                                       }
 
-
                                                   }
                                               }
         );

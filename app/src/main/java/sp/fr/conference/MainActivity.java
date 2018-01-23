@@ -1,5 +1,6 @@
 package sp.fr.conference;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -78,11 +79,14 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.listinfConference) {
 
         } else if (id == R.id.myConference) {
-
+            navigateToFragment(new MesConferencesFragment());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void navigateToFragment(Fragment targetFragment) {
     }
 }

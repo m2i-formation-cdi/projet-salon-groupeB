@@ -14,8 +14,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Mes Conferences"
-            android:padding="5dp"
-            android:layout_gravity="top"/>
+            android:padding="10dp"
+            android:gravity="center"
+            android:textSize="20dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"

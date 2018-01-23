@@ -1,0 +1,74 @@
+{
+  "project_info": {
+    "project_number": "221188526541",
+    "firebase_url": "https://dbconference-4d551.firebaseio.com",
+    "project_id": "dbconference-4d551",
+    "storage_bucket": "dbconference-4d551.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:221188526541:android:2a3deeffd1fd8f5a",
+        "android_client_info": {
+          "package_name": "sp.fr.conference"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "221188526541-o6873cvo1st6661iaohsec445tvlc6ca.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sp.fr.conference",
+            "certificate_hash": "913953b93e1e238609dbc738532ac8994cc3028d"
+          }
+        },
+        {
+          "client_id": "221188526541-o513ab43ln8bqond49v2dldt7e9ilmlt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sp.fr.conference",
+            "certificate_hash": "2399e4a1150e13bbc61be4763f52a0866fd780d4"
+          }
+        },
+        {
+          "client_id": "221188526541-4tbve9jrrln35sr1htv6i225n9dgdnj8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sp.fr.conference",
+            "certificate_hash": "a9a298257dde00b24654cc9ff9de19bcf3933a67"
+          }
+        },
+        {
+          "client_id": "221188526541-8qenbksiss5klkvi1m36n8fhpee975bm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcj8lVju4IjAbUHLL7ZlfYBprbuZaHTp0"
+        },
+        {
+          "current_key": "AIzaSyDh02CcLSZmjRtCllQS1tvUY4NFw92CLKw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "221188526541-8qenbksiss5klkvi1m36n8fhpee975bm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="sp.fr.conference.AdministratorFragment"
+    tools:context="sp.fr.conference.AdministratorThemeFragment"
     android:weightSum="1.0"
     >
 
@@ -75,6 +75,14 @@
                 android:visibility="invisible"
                 android:text=""
                 />
+
+            <ImageView
+                android:id="@+id/imageViewDel"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:visible="true"
+                android:visibility="invisible"
+                app:srcCompat="@android:drawable/ic_delete" />
 
             <ImageView
                 android:id="@+id/imageViewEdit"

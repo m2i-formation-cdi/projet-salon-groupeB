@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.myConference) {
 
         } else if (id == R.id.administrator) {
-            navigateToFragment( new AdministratorThemeFragment() );
+            navigateToFragment( new AdministratorListingThemeFragment() );
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

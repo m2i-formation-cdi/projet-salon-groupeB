@@ -1,6 +1,7 @@
 package sp.fr.conference;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -40,7 +41,7 @@ public class AdministratorFragment extends Fragment  implements View.OnClickList
     private ArrayAdapter themeAdapter;
     private ThemeArrayAdapter adapter;
     private EditText editTextNewOrUpdate, editTextAddTheme;
-    private Boolean NewOrUpdateStatue = false;
+    private Boolean NewOrUpdateStatue = false, AddStatue = true;
     private ImageView imageValide, imageViewAdd, imageViewAjout;
 
 
@@ -64,19 +65,12 @@ public class AdministratorFragment extends Fragment  implements View.OnClickList
         //Rcupération de la listView
         themesListView = view.findViewById(R.id.ListViewThemes);
         editTextNewOrUpdate = view.findViewById(R.id.EditTextEditTheme);
-        editTextAddTheme = view.findViewById(R.id.EditTextAddTheme);
         imageViewAdd = view.findViewById(R.id.imageViewAdd);
-        imageViewAjout = view.findViewById(R.id.imageViewAddTheme);
 
         imageValide = view.findViewById(R.id.imageViewEdit);
         imageValide.setOnClickListener(this);
         imageViewAdd.setOnClickListener(this);
-        imageViewAjout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "click", Toast.LENGTH_SHORT).show();
-            }
-        });
+
 
         themesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -156,14 +150,65 @@ public class AdministratorFragment extends Fragment  implements View.OnClickList
 
     }
 
+    public void refreshFragment() {
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
+
+    }
+
     @Override
     public void onClick(View v) {
 
+        Log.i("Test", v.toString());
         //String testId = themeReference.push().getKey();
 
-        String name = editTextNewOrUpdate.getText().toString();
-        ThemesConference sport = new ThemesConference(name,  key);
-        themeReference.child(key).setValue(sport);
+        //String name = editTextNewOrUpdate.getText().toString();
+        //ThemesConference sport = new ThemesConference(name,  key);
+        //themeReference.child(key).setValue(sport);
+
+        if(v.getId() == R.id.imageViewEdit) {
+
+
+            if(key.equals("")) { //Si clé vide = Ajout
+
+                String themeId = themeReference.push().getKey();
+                String name = editTextNewOrUpdate.getText().toString();
+                ThemesConference themeAjout = new ThemesConference(name,  themeId);
+                themeReference.child(themeId).setValue(themeAjout);
+                refreshFragment();
+
+            } else { //Sinon Edition
+
+                String name = editTextNewOrUpdate.getText().toString();
+                ThemesConference themeAjout = new ThemesConference(name,  key);
+                themeReference.child(key).setValue(themeAjout);
+                refreshFragment();
+            }
+
+        }
+        else if(v.getId() == R.id.imageViewAdd) {
+
+            //Si vrai on ajout
+            if(AddStatue) {
+                AddStatue = false;
+                //on vide la chaine & la clé
+                editTextNewOrUpdate.setText("");
+                key = "";
+
+                //On affiche les elements
+                editTextNewOrUpdate.setVisibility(View.VISIBLE);
+                imageValide.setVisibility(View.VISIBLE);
+            } else {
+                AddStatue = true;
+                //On cache les elements d'éditions
+                NewOrUpdateStatue = false;
+
+                editTextNewOrUpdate.setVisibility(View.INVISIBLE);
+                imageValide.setVisibility(View.INVISIBLE);
+            }
+        }
+
 
     }
 

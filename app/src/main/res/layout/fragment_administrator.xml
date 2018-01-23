@@ -38,7 +38,7 @@
         <ListView
             android:id="@+id/ListViewThemes"
             android:layout_width="0dp"
-            android:layout_height="348dp"
+            android:layout_height="350dp"
             android:layout_weight="0.5"
             android:layout_gravity="center_horizontal"
             />
@@ -54,42 +54,37 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:weightSum="1.0"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
         <!--android:background="@color/colorPrimaryDark"-->
 
-        <EditText
-            android:layout_width="0dp"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:id="@+id/EditTextEditTheme"
-            android:visibility="invisible"
-            android:text=""
-            />
+            android:weightSum="1.0"
+            android:gravity="center_horizontal">
 
-        <ImageView
-            android:id="@+id/imageViewEdit"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:visibility="invisible"
-            app:srcCompat="@mipmap/ic_launcher_round" />
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:id="@+id/EditTextEditTheme"
+                android:visibility="invisible"
+                android:text=""
+                />
 
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:id="@+id/EditTextAddTheme"
-            android:visibility="invisible"
-            android:text=""
-            />
+            <ImageView
+                android:id="@+id/imageViewEdit"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:visibility="invisible"
+                app:srcCompat="@mipmap/ic_launcher_round" />
 
-        <ImageView
-            android:id="@+id/imageViewAddTheme"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:visibility="invisible"
-            app:srcCompat="@mipmap/ic_launcher_round" />
+        </LinearLayout>
+
 
     </LinearLayout>
 

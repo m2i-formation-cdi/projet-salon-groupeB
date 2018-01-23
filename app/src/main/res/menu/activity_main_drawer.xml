@@ -7,11 +7,14 @@
         <item
             android:id="@+id/login"
             android:icon="@mipmap/user"
+            android:onClick="onLogin"
             android:title="Connectez vous" />
         <item
             android:id="@+id/logOut"
             android:icon="@mipmap/off"
-            android:title="Déconnexion" />
+            android:onClick="onLogout"
+            android:title="Déconnexion"
+            android:visible="false"/>
         <item
             android:id="@+id/listinfConference"
             android:icon="@mipmap/groupeuser"

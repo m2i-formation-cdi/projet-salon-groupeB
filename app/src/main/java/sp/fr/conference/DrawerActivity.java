@@ -28,7 +28,7 @@ import java.util.List;
 import sp.fr.conference.model.User;
 
 
-public class MainActivity extends AppCompatActivity
+public class DrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public final int LOGIN_REQUESTCODE = 1;

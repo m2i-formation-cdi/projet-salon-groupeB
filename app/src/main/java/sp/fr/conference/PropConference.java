@@ -50,6 +50,8 @@ public class PropConference extends Fragment {
     String speakerFirstName;
     List<ThemesConference> themesList = new ArrayList<>();
 
+    private ThemeAdapter adapter;
+
     public PropConference() {
         // Required empty public constructor
     }
@@ -75,7 +77,10 @@ public class PropConference extends Fragment {
                     ThemesConference theme = themeSnapshot.getValue(ThemesConference.class);
                     themesList.add(theme);
                 }
+
+                adapter.notifyDataSetChanged();
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -93,7 +98,9 @@ public class PropConference extends Fragment {
         speakerFirstNameEditText = view.findViewById(R.id.speakerFirstName);
         conferenceSpinner = view.findViewById(R.id.spinnerTheme);
 
-        ThemeAdapter adapter = new ThemeAdapter(this.getActivity(), R.layout.theme_list_item, themesList);
+
+        // Création de l'Adapter pour récupérer les données de la liste (themesList) vers l'Adapter
+        adapter = new ThemeAdapter(this.getActivity(), R.layout.theme_list_item, themesList);
         conferenceSpinner.setAdapter(adapter);
 
         //Gestion du clic sur le bouton valider
@@ -128,6 +135,7 @@ public class PropConference extends Fragment {
         return view;
     }
 
+    // Envoi des données de l'Adapter vers la vue
     private class ThemeAdapter extends ArrayAdapter<ThemesConference>{
 
         private Activity context;
@@ -146,7 +154,7 @@ public class PropConference extends Fragment {
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            View view = this.context.getLayoutInflater().inflate(this.resource, parent, false);
+            View view = this.context.getLayoutInflater().inflate(R.layout.theme_list_item, parent, false);
 
             ThemesConference item = this.data.get(position);
             TextView themeTextView = view.findViewById(R.id.themeSpinnerTextView);

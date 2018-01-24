@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,10 +29,11 @@ import java.util.List;
 import sp.fr.conference.model.Conference;
 import sp.fr.conference.model.ConferenceArrayAdapter;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MesConferencesFragment extends Fragment implements View.OnClickListener {
+public class MesConferencesFragment extends Fragment implements View.OnClickListener{
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference conferenceReference;
@@ -57,11 +59,12 @@ public class MesConferencesFragment extends Fragment implements View.OnClickList
 
         //Récupération de la listView et des images
         conferenceListView = view.findViewById(R.id.userConferenceListViewItem);
-        conferenceList = new ArrayList<>();
+
         changeButton = view.findViewById(R.id.changeButton);
         deleteButton = view.findViewById(R.id.deleteButton);
         addNewConfButton = view.findViewById(R.id.addNewConfButton);
 
+        //Gestion des suppression, modification ou ajout au clic d'un bouton
         changeButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
         addNewConfButton.setOnClickListener(this);
@@ -72,6 +75,8 @@ public class MesConferencesFragment extends Fragment implements View.OnClickList
                 Conference item = (Conference) parent.getItemAtPosition(position);
             }
         });
+
+        conferenceList = new ArrayList<>();
 
         //Instanciation de la liste
         adapter = new ConferenceArrayAdapter(this.getActivity(),R.layout.fragment_mes_conferences, conferenceList);
@@ -87,7 +92,7 @@ public class MesConferencesFragment extends Fragment implements View.OnClickList
                 //Boucle sur l'ensemble des noeuds
                 for (DataSnapshot conferenceSnapshot : dataSnapshot.getChildren()){
 
-                    //Création d'une instance de thème et hydratation avec les données du snapshot
+                    //Création d'une instance de conference et hydratation avec les données du snapshot
                     Conference userConf = (Conference)conferenceSnapshot.getValue(Conference.class);
 
                     String title = conferenceSnapshot.getChildren().toString();
@@ -112,16 +117,21 @@ public class MesConferencesFragment extends Fragment implements View.OnClickList
     public void onClick(View view) {
 
         if(view.getId() == R.id.deleteButton) {
-            userConferenceListViewItem.setValue(null);
-            refreshFragment();
+           //A MODIFIER CF BDD SI VALIDER=1 SINON=0
+            Toast.makeText(getActivity(), "Conference supprimer de ma liste", Toast.LENGTH_SHORT).show();
         }
         else if(view.getId() == R.id.changeButton){
             navigateToFragment(new ConferenceInformation());
+            Toast.makeText(getActivity(), "Redirection sur ConferenceInformation", Toast.LENGTH_SHORT).show();
         }
         else if(view.getId() == R.id.addNewConfButton){
             navigateToFragment(new PropConference());
+            Toast.makeText(getActivity(), "Redirection sur PropConference", Toast.LENGTH_SHORT).show();
         }
 
     }
 
+    public void navigateToFragment(Fragment targetFragment) {
+        getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,targetFragment).commit();
+    }
 }

@@ -161,8 +161,8 @@ public class AdministratorThemeFragment extends Fragment  implements View.OnClic
 
     public void refreshFragment() {
 
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.detach(this).attach(this).commit();
+        FragmentTransaction refresh = getFragmentManager().beginTransaction(); //à modifie avec ConferenceList.clear(); /adapter.notifyDataSetChanged();
+        refresh.detach(this).attach(this).commit();
 
     }
 

@@ -14,6 +14,8 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private String key;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,5 +94,12 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    public String getKey() {
+        return key;
+    }
 
+    public MainActivity setKey(String key) {
+        this.key = key;
+        return this;
+    }
 }

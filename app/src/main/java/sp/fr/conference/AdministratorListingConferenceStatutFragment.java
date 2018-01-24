@@ -2,6 +2,7 @@ package sp.fr.conference;
 
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -40,6 +41,7 @@ public class AdministratorListingConferenceStatutFragment extends Fragment {
     private ListView conferenceListView ;
     private List<Conference> ConferenceList;
     private ConferenceArrayAdapter adapter;
+    private int filtre = 0;
 
     public AdministratorListingConferenceStatutFragment() {
         // Required empty public constructor
@@ -68,12 +70,13 @@ public class AdministratorListingConferenceStatutFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
 
                 Conference item = (Conference) parent.getItemAtPosition(position);
-                Log.i("Info System", "Click sur l'id : " + item.getId());
 
-                //On envoie les données au fragment au click sur le bouton
-                //final Intent transmition = new Intent(getActivity(), AdministratorGestionConferenceFragment.class);
-                //transmition.putExtra("key", item.getId());
-                //LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(transmition);
+
+
+                MainActivity activity = (MainActivity) getActivity();
+                MainActivity key =  activity.setKey( item.getId() );
+
+                navigateToFragment( new AdministratorGestionConferenceFragment() );
 
             }
         });
@@ -99,8 +102,29 @@ public class AdministratorListingConferenceStatutFragment extends Fragment {
                     String name = themeSnapshot.getChildren().toString();
 
                     //Ajout du theme à la liste
-                    ConferenceList.add(themeConf);
 
+                    if(filtre == 0) { //Affciher l'ensemble des conferences
+                        ConferenceList.add(themeConf);
+                    } else if(themeConf.getStatut() == null) {
+
+                        if (filtre == 1) { //Affiche les conferences en attente
+                            ConferenceList.add(themeConf);
+                        }
+
+                    } else {
+
+                        if (filtre == 2 && themeConf.getStatut().equals("0")) { //Affiche les conferences refuse
+                            ConferenceList.add(themeConf);
+                        } else if (filtre == 3 && themeConf.getStatut().equals("1")) { //Affiche les conferences valide
+                            ConferenceList.add(themeConf);
+                        }
+                    }
+
+                    /**
+                     *
+                     * ConferenceList.clear(); //clean de la liste
+                     * adapter.notifyDataSetChanged(); //recharge de la liste
+                     */
 
                 }
 
@@ -114,6 +138,12 @@ public class AdministratorListingConferenceStatutFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void navigateToFragment(Fragment targetFragment) {
+
+        getFragmentManager().beginTransaction().replace(R.id.fragmentContaier, targetFragment).commit();
+
     }
 
     private class ConferenceArrayAdapter extends ArrayAdapter<Conference> {

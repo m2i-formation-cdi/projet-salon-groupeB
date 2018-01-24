@@ -9,15 +9,23 @@ public class Conference {
     private String title;
     private ThemesConference theme;
     private String description;
-    private User user;
+    private User attendents;
     private String id;
     private String statut;
+    private String day;
+    private String startHour;
+    private String endHour;
+    private String location;
+    private String latitude;
+    private String longitude;
+    private User speaker;
+    private Comments comments;
 
     public Conference(String title, ThemesConference theme, String description, User user, String id, String statut) {
         this.title = title;
         this.theme = theme;
         this.description = description;
-        this.user = user;
+        this.attendents = user;
         this.id = id;
         this.statut = statut;
     }
@@ -52,12 +60,12 @@ public class Conference {
         return this;
     }
 
-    public User getUser() {
-        return user;
+    public User getAttendents() {
+        return attendents;
     }
 
-    public Conference setUser(User user) {
-        this.user = user;
+    public Conference setAttendents(User attendents) {
+        this.attendents = attendents;
         return this;
     }
 
@@ -76,6 +84,78 @@ public class Conference {
 
     public Conference setStatut(String statut) {
         this.statut = statut;
+        return this;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public Conference setDay(String day) {
+        this.day = day;
+        return this;
+    }
+
+    public String getStartHour() {
+        return startHour;
+    }
+
+    public Conference setStartHour(String startHour) {
+        this.startHour = startHour;
+        return this;
+    }
+
+    public String getEndHour() {
+        return endHour;
+    }
+
+    public Conference setEndHour(String endHour) {
+        this.endHour = endHour;
+        return this;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public Conference setLocation(String location) {
+        this.location = location;
+        return this;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public Conference setLatitude(String latitude) {
+        this.latitude = latitude;
+        return this;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public Conference setLongitude(String longitude) {
+        this.longitude = longitude;
+        return this;
+    }
+
+    public User getSpeaker() {
+        return speaker;
+    }
+
+    public Conference setSpeaker(User speaker) {
+        this.speaker = speaker;
+        return this;
+    }
+
+    public Comments getComments() {
+        return comments;
+    }
+
+    public Conference setComments(Comments comments) {
+        this.comments = comments;
         return this;
     }
 }

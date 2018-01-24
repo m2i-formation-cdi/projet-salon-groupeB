@@ -64,8 +64,6 @@ public class AdministratorListingConferenceStatutFragment extends Fragment {
 
                 MainActivity activity = (MainActivity) getActivity();
                 MainActivity key =  activity.setKey( item.getId() );
-                MainActivity name =  activity.setName( item.getTitle() );
-                MainActivity description =  activity.setDescription( item.getDescription() );
 
                 navigateToFragment( new AdministratorGestionConferenceFragment() );
 
@@ -133,7 +131,7 @@ public class AdministratorListingConferenceStatutFragment extends Fragment {
 
     private void navigateToFragment(Fragment targetFragment) {
 
-        getFragmentManager().beginTransaction().replace(R.id.fragmentContaier, targetFragment).commit();
+        getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, targetFragment).commit();
 
     }
 

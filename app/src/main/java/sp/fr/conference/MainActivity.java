@@ -15,8 +15,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private String key;
-    private String name;
-    private String description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +90,7 @@ public class MainActivity extends AppCompatActivity
 
     private void navigateToFragment(Fragment targetFragment) {
 
-        getFragmentManager().beginTransaction().replace(R.id.fragmentContaier, targetFragment).commit();
+        getFragmentManager().beginTransaction().replace(R.id.fragmentContainer, targetFragment).commit();
 
     }
 
@@ -102,24 +100,6 @@ public class MainActivity extends AppCompatActivity
 
     public MainActivity setKey(String key) {
         this.key = key;
-        return this;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public MainActivity setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public MainActivity setDescription(String description) {
-        this.description = description;
         return this;
     }
 }

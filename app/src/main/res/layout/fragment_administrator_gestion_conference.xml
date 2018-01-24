@@ -64,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
+            android:id="@+id/JoursAfficherDebut"
             android:inputType="date" />
 
         <TextView
@@ -74,6 +75,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/MoisAfficherDebut"
             android:layout_weight="0.1"
             android:inputType="date" />
 
@@ -86,6 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
+            android:id="@+id/AnneeAfficherDebut"
             android:inputType="date" />
 
         <ImageView
@@ -110,6 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
+            android:id="@+id/JoursAfficherFin"
             android:inputType="date" />
 
         <TextView
@@ -121,6 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
+            android:id="@+id/MoisAfficherFin"
             android:inputType="date" />
 
         <TextView
@@ -132,6 +137,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
+            android:id="@+id/AnneeAfficherFin"
             android:inputType="date" />
 
         <ImageView
@@ -160,6 +166,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/lieuxConference"
             android:paddingLeft="10dp"
             android:paddingTop="50dp"
             android:text="La Maison Petrowski" />

@@ -12,6 +12,10 @@ public class ThemesConference {
     public ThemesConference() {
     }
 
+    public ThemesConference(String name) {
+        this.name = name;
+    }
+
     public ThemesConference(String name, String id) {
         this.name = name;
         this.id = id;

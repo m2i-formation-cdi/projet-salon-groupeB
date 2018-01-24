@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +24,10 @@ public class AdministratorGestionConferenceFragment extends Fragment {
     private DatabaseReference themeReference;
     private TextView affichageNomConference;
     private TextView affichageDescriptionConference;
+
+    private String key;
+    private String name;
+    private String description;
 
     public AdministratorGestionConferenceFragment() {
         // Required empty public constructor
@@ -36,7 +42,9 @@ public class AdministratorGestionConferenceFragment extends Fragment {
 
         //récupération de la key
         MainActivity activity = (MainActivity) getActivity();
-        String key = activity.getKey();
+        key = activity.getKey();
+        name = activity.getName();
+        description = activity.getDescription();
 
         //Toast.makeText(getActivity(), key, Toast.LENGTH_LONG).show();
 
@@ -48,6 +56,9 @@ public class AdministratorGestionConferenceFragment extends Fragment {
         affichageNomConference = view.findViewById(R.id.textViexName);
         affichageDescriptionConference = view.findViewById(R.id.textViexDescription);
 
+
+        affichageNomConference.setText("Titre : " + name);
+        affichageDescriptionConference.setText("Description : " + description);
 
 
 

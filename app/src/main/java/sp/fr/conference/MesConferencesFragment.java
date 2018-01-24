@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sp.fr.conference.model.Conference;
+import sp.fr.conference.model.ConferenceArrayAdapter;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -36,13 +38,12 @@ public class MesConferencesFragment extends Fragment implements View.OnClickList
     private List<Conference> conferenceList;
     private ListView conferenceListView;
     private ConferenceArrayAdapter adapter;
-    private ImageView changeButton, deleteButton;
+    private ImageView changeButton, deleteButton, addNewConfButton;
 
 
     public MesConferencesFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,9 +60,11 @@ public class MesConferencesFragment extends Fragment implements View.OnClickList
         conferenceList = new ArrayList<>();
         changeButton = view.findViewById(R.id.changeButton);
         deleteButton = view.findViewById(R.id.deleteButton);
+        addNewConfButton = view.findViewById(R.id.addNewConfButton);
 
         changeButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
+        addNewConfButton.setOnClickListener(this);
 
         conferenceListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -108,46 +111,17 @@ public class MesConferencesFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View view) {
 
-    }
-
-
-    private class ConferenceArrayAdapter extends ArrayAdapter<Conference>{
-
-        private Activity context;
-        int resource;
-        List<Conference> data;
-
-        public ConferenceArrayAdapter(Activity context, int resource, List<Conference> data) {
-            super(context, resource, data);
-
-            this.context = context;
-            this.resource = resource;
-            this.data = data;
+        if(view.getId() == R.id.deleteButton) {
+            userConferenceListViewItem.setValue(null);
+            refreshFragment();
+        }
+        else if(view.getId() == R.id.changeButton){
+            navigateToFragment(new ConferenceInformation());
+        }
+        else if(view.getId() == R.id.addNewConfButton){
+            navigateToFragment(new PropConference());
         }
 
-    public View getView(int position, View convertView, ViewGroup parent){
-
-        View view = context.getLayoutInflater().inflate(this.resource, parent, false);
-
-        Conference selectedConference = conferenceList.get(position);
-
-        TextView textView = view.findViewById(R.id.textViewMesConferences);
-
-        return view;
-
-        }
-    }
-    public void onDelete(View view){
-        //Récupération de la position taguée
-        int position = (int) view.getTag();
-        Conference conf = this.conferenceList.get(position);
-
     }
 
-    public void onChange(View view){
-        //Récupération de la position taguée
-        int position = (int) view.getTag();
-        Conference conf = this.conferenceList.get(position);
-
-    }
 }

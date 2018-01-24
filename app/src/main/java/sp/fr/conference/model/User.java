@@ -4,27 +4,28 @@ package sp.fr.conference.model;
  * Created by Formation on 23/01/2018.
  */
 
-class User {
+public class User {
 
-    private String firstname;
+    private String firstName;
     private String name;
     private String mail;
+    private Double id;
 
     public User() {
     }
 
-    public User(String firstname, String name, String mail) {
-        this.firstname = firstname;
+    public User(String firstName, String name, String mail) {
+        this.firstName = firstName;
         this.name = name;
         this.mail = mail;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public User setFirstname(String firstname) {
-        this.firstname = firstname;
+    public User setFirstName(String firstName) {
+        this.firstName = firstName;
         return this;
     }
 
@@ -43,6 +44,15 @@ class User {
 
     public User setMail(String mail) {
         this.mail = mail;
+        return this;
+    }
+
+    public Double getId() {
+        return id;
+    }
+
+    public User setId(Double id) {
+        this.id = id;
         return this;
     }
 }

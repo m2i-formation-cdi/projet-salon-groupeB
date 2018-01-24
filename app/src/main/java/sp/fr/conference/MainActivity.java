@@ -88,5 +88,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void navigateToFragment(Fragment targetFragment) {
+        getFragmentManager().beginTransaction().replace(R.id.fragmentContaier, targetFragment).commit();
     }
 }

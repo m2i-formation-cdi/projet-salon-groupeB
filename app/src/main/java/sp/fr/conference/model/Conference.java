@@ -7,18 +7,20 @@ package sp.fr.conference.model;
 public class Conference {
 
    private String title;
-   private String theme;
+   private ThemesConference theme;
    private String description;
    private User user;
+   private String id;
 
     public Conference() {
     }
 
-    public Conference(String title, String theme, String description, User user) {
+    public Conference(String title, ThemesConference theme, String description, User user, String id) {
         this.title = title;
         this.theme = theme;
         this.description = description;
         this.user = user;
+        this.id = id;
     }
 
     public String getTitle() {
@@ -30,12 +32,21 @@ public class Conference {
         return this;
     }
 
-    public String getTheme() {
+    public ThemesConference getTheme() {
         return theme;
     }
 
-    public Conference setTheme(String theme) {
+    public Conference setTheme(ThemesConference theme) {
         this.theme = theme;
+        return this;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public Conference setId(String id) {
+        this.id = id;
         return this;
     }
 

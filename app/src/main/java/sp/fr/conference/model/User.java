@@ -9,7 +9,7 @@ public class User {
     private String firstName;
     private String name;
     private String mail;
-    private Double id;
+    private String id;
 
     public User() {
     }
@@ -47,11 +47,11 @@ public class User {
         return this;
     }
 
-    public Double getId() {
+    public String getId() {
         return id;
     }
 
-    public User setId(Double id) {
+    public User setId(String id) {
         this.id = id;
         return this;
     }

@@ -1,23 +1,12 @@
 package sp.fr.conference;
 
-
-import android.app.Activity;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sp.fr.conference.model.Conference;
+import sp.fr.conference.model.ConferenceArrayAdapter;
 
 
 /**
@@ -60,7 +50,6 @@ public class AdministratorListingConferenceStatutFragment extends Fragment {
 
         //Rcupération de la listView
         conferenceListView = view.findViewById(R.id.ListViewThemesWaiting);
-
 
         ConferenceList = new ArrayList<>();
 
@@ -145,52 +134,6 @@ public class AdministratorListingConferenceStatutFragment extends Fragment {
     private void navigateToFragment(Fragment targetFragment) {
 
         getFragmentManager().beginTransaction().replace(R.id.fragmentContaier, targetFragment).commit();
-
-    }
-
-    private class ConferenceArrayAdapter extends ArrayAdapter<Conference> {
-
-        private Activity context;
-        int resource;
-        List<Conference> data;
-
-        public ConferenceArrayAdapter(Activity context, int resource, List<Conference> data) {
-            super(context, resource, data);
-
-            this.context = context;
-            this.resource = resource;
-            this.data = data;
-
-        }
-
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
-            View view = context.getLayoutInflater().inflate(this.resource, parent, false);
-
-            Conference currentConference = ConferenceList.get(position);
-
-            TextView textView = view.findViewById(R.id.ListTextItemConferenceStatut);
-            //Rcupération de l'image du statut
-            ImageView imageViewStatutConference = view.findViewById(R.id.imageViewStatutConference);
-
-            String etatConference = "";
-
-            if(currentConference.getStatut() == null) {
-                imageViewStatutConference.setImageResource(R.mipmap.wait);
-            } else if(currentConference.getStatut().equals("0")){
-                imageViewStatutConference.setImageResource(R.mipmap.delete);
-            }else if(currentConference.getStatut().equals("1")){
-                //etatConference = "Validé";
-                imageViewStatutConference.setImageResource(R.mipmap.check);
-            }
-
-            textView.setText(
-                    currentConference.getTitle() + " " + etatConference
-            );
-
-            return view;
-        }
-
 
     }
 

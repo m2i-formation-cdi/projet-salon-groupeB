@@ -10,6 +10,8 @@ public class Conference {
     private String theme;
     private String description;
     private User user;
+    private String id;
+    private String statut;
 
     public Conference() {
     }
@@ -54,6 +56,24 @@ public class Conference {
 
     public Conference setUser(User user) {
         this.user = user;
+        return this;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public Conference setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    public String getStatut() {
+        return statut;
+    }
+
+    public Conference setStatut(String statut) {
+        this.statut = statut;
         return this;
     }
 }

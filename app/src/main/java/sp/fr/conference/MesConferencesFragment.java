@@ -2,12 +2,10 @@ package sp.fr.conference;
 
 
 import android.app.Activity;
-import android.content.ContentValues;
-import android.content.Context;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.NonNull;
-import android.telecom.Conference;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,18 +25,18 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import sp.fr.conference.model.Conference;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MesConferencesFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class MesConferencesFragment extends Fragment implements View.OnClickListener {
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference conferenceReference;
-    private List<Conference> userConferenceList = new ArrayList<>();
-    private ListView userConferenceListView;
-    private ArrayAdapter UserConferenceArrayAdapter;
-    private UserConferenceArrayAdapter adapter;
+    private List<Conference> conferenceList;
+    private ListView conferenceListView;
+    private ConferenceArrayAdapter adapter;
+    private ImageView changeButton, deleteButton;
 
 
     public MesConferencesFragment() {
@@ -50,26 +48,49 @@ public class MesConferencesFragment extends Fragment implements AdapterView.OnIt
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-      View view = inflater.inflate(R.layout.fragment_mes_conferences, container, false);
+      View view = inflater.inflate(R.layout.mes_conferences_list_view, container, false);
 
+        //Préparation de la base de données
         firebaseDatabase = FirebaseDatabase.getInstance();
         conferenceReference = firebaseDatabase.getReference().child("conference");
 
-        userConferenceListView = view.findViewById(R.id.userConferenceListViewItem);
+        //Récupération de la listView et des images
+        conferenceListView = view.findViewById(R.id.userConferenceListViewItem);
+        conferenceList = new ArrayList<>();
+        changeButton = view.findViewById(R.id.changeButton);
+        deleteButton = view.findViewById(R.id.deleteButton);
 
-        adapter = new UserConferenceArrayAdapter(this.getActivity(),R.layout.mes_conferences_list_view);
-        userConferenceListView.setAdapter(adapter);
+        changeButton.setOnClickListener(this);
+        deleteButton.setOnClickListener(this);
+
+        conferenceListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
+                Conference item = (Conference) parent.getItemAtPosition(position);
+            }
+        });
+
+        //Instanciation de la liste
+        adapter = new ConferenceArrayAdapter(this.getActivity(),R.layout.fragment_mes_conferences, conferenceList);
+        conferenceListView.setAdapter(adapter);
 
 
         conferenceReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                userConferenceList.clear();
+                //Réinitialisation de la liste
+                conferenceList.clear();
 
-                for (DataSnapshot userConferenceSnapshot : dataSnapshot.getChildren()){
+                //Boucle sur l'ensemble des noeuds
+                for (DataSnapshot conferenceSnapshot : dataSnapshot.getChildren()){
 
-                    Conference userConference = userConferenceSnapshot.getValue(Conference.class);
-                    userConferenceList.add(userConference);
+                    //Création d'une instance de thème et hydratation avec les données du snapshot
+                    Conference userConf = (Conference)conferenceSnapshot.getValue(Conference.class);
+
+                    String title = conferenceSnapshot.getChildren().toString();
+
+                    //Ajout de la conference à la liste
+                    conferenceList.add(userConf);
                 }
 
                 adapter.notifyDataSetChanged();
@@ -85,37 +106,48 @@ public class MesConferencesFragment extends Fragment implements AdapterView.OnIt
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
+    public void onClick(View view) {
 
     }
 
-    private class UserConferenceArrayAdapter extends ArrayAdapter<Conference>{
 
-        private Fragment context;
+    private class ConferenceArrayAdapter extends ArrayAdapter<Conference>{
+
+        private Activity context;
         int resource;
         List<Conference> data;
 
-        public UserConferenceArrayAdapter(@NonNull Context context, int resource) {
-            super(getActivity(),R.layout.mes_conferences_list_view,userConferenceList);
+        public ConferenceArrayAdapter(Activity context, int resource, List<Conference> data) {
+            super(context, resource, data);
+
+            this.context = context;
+            this.resource = resource;
+            this.data = data;
         }
-    }
 
     public View getView(int position, View convertView, ViewGroup parent){
-        Conference selectedConference = userConferenceList.get(position);
 
-        View view = getActivity().getLayoutInflater().inflate(R.layout.mes_conferences_list_view, parent, false);
+        View view = context.getLayoutInflater().inflate(this.resource, parent, false);
+
+        Conference selectedConference = conferenceList.get(position);
 
         TextView textView = view.findViewById(R.id.textViewMesConferences);
-        textView.setText(selectedConference.getTitle());
-
-        ImageView changeButton = view.findViewById(R.id.changeButton);
-
-        ImageView deleteButton = view.findViewById(R.id.deleteButton);
-
-        changeButton.setTag(position);
-        deleteButton.setTag(position);
 
         return view;
+
+        }
+    }
+    public void onDelete(View view){
+        //Récupération de la position taguée
+        int position = (int) view.getTag();
+        Conference conf = this.conferenceList.get(position);
+
+    }
+
+    public void onChange(View view){
+        //Récupération de la position taguée
+        int position = (int) view.getTag();
+        Conference conf = this.conferenceList.get(position);
 
     }
 }

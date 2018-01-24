@@ -27,8 +27,9 @@
     </group>
 
     <item
-        android:id="@+id/themeConf"
+        android:id="@+id/themeDescription"
         android:icon="@mipmap/ic_launcher_round"
         android:title="Administrateur" />
+    <item android:title="TestDescription" />
 
 </menu>

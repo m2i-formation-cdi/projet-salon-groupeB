@@ -1,27 +1,30 @@
 package sp.fr.conference;
 
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,10 +103,12 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Toast.makeText(this,"id"+id,Toast.LENGTH_SHORT).show();
 
         if (id == R.id.login) {
             //
@@ -113,6 +118,8 @@ public class MainActivity extends AppCompatActivity
             //
         } else if (id == R.id.myConference) {
             //
+        } else if (id == R.id.themeDescription){
+            navigateToFragment(new DescriptionConferenceFragment());
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -120,7 +127,13 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    private void navigateToFragment(Fragment targetFragment) {
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainer,targetFragment)
+                .commit();
 
+    }
 
 
     /**

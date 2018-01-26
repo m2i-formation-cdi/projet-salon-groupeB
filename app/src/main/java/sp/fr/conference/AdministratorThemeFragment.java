@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.Attributes;
 
+import sp.fr.conference.model.Conference;
+import sp.fr.conference.model.DAO;
 import sp.fr.conference.model.ThemesConference;
 
 
@@ -62,6 +64,7 @@ public class AdministratorThemeFragment extends Fragment  implements View.OnClic
         firebaseDatabase = FirebaseDatabase.getInstance();
         themeReference = firebaseDatabase.getReference().child("theme");
 
+
         //Rcupération de la listView
         themesListView = view.findViewById(R.id.ListViewThemes);
         editTextNewOrUpdate = view.findViewById(R.id.EditTextEditTheme);
@@ -75,7 +78,6 @@ public class AdministratorThemeFragment extends Fragment  implements View.OnClic
         imageViewDel.setOnClickListener(this);
 
         //addBooks();
-
 
         themesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -108,13 +110,37 @@ public class AdministratorThemeFragment extends Fragment  implements View.OnClic
 
         ThemesList = new ArrayList<>();
 
-        //addBooks();
-
-        //Instanciation de la liste
-        adapter = new ThemeArrayAdapter(this.getActivity(), R.layout.theme_list_items , ThemesList);
+        adapter = new ThemeArrayAdapter(this.getActivity(), R.layout.theme_list_items, ThemesList);
         themesListView.setAdapter(adapter);
 
+        themeReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //Réinitialisation de la liste
+                ThemesList.clear();
 
+                //Boucle sur l'ensemble des noeuds
+                for(DataSnapshot themeSnapshot : dataSnapshot.getChildren()) {
+
+                    //Création d'une instance de theme et hydratation avec les données du snapshot
+                    ThemesConference themeConf = (ThemesConference)themeSnapshot.getValue(ThemesConference.class);
+
+                    String name = themeSnapshot.getChildren().toString();
+
+                    //Ajout du theme à la liste
+                    ThemesList.add(themeConf);
+
+
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         return view;
     }

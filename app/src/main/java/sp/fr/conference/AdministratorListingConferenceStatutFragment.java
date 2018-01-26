@@ -2,6 +2,7 @@ package sp.fr.conference;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +71,7 @@ public class AdministratorListingConferenceStatutFragment extends Fragment {
             }
         });
 
-
+        Log.i("INFO", "----------------------- start array adapter -------------------------");
         //Instanciation de la liste
         adapter = new ConferenceArrayAdapter(this.getActivity(), R.layout.theme_list_items_conference_statut, ConferenceList);
         conferenceListView.setAdapter(adapter);
@@ -116,7 +117,7 @@ public class AdministratorListingConferenceStatutFragment extends Fragment {
                      */
 
                 }
-
+                Log.i("INFO", "----------------------- étape changed -------------------------");
                 adapter.notifyDataSetChanged();
             }
 
@@ -126,6 +127,7 @@ public class AdministratorListingConferenceStatutFragment extends Fragment {
             }
         });
 
+        Log.i("INFO", "----------------------- return view -------------------------");
         return view;
     }
 

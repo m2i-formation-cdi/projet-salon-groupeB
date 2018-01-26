@@ -11,10 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import sp.fr.conference.model.Comments;
 import sp.fr.conference.model.Conference;
+import sp.fr.conference.model.DAO;
 import sp.fr.conference.model.ThemesConference;
 import sp.fr.conference.model.User;
 
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity
 
     private Conference obj;
     private List<Conference> ConferenceList;
+    private ThemesConference ThemesList;
+    private List<ThemesConference> ThemesListArray;
 /*
     private String title;
     private ThemesConference theme;
@@ -55,6 +59,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -144,6 +149,27 @@ public class MainActivity extends AppCompatActivity
 
     public MainActivity setConferenceList(List<Conference> conferenceList) {
         ConferenceList = conferenceList;
+        return this;
+    }
+
+    public ThemesConference getThemesList() {
+        return ThemesList;
+    }
+
+    public MainActivity setThemesList(ThemesConference themesList) {
+        ThemesList = themesList;
+
+        ThemesListArray.add(ThemesList);
+
+        return this;
+    }
+
+    public List<ThemesConference> getThemesListArray() {
+        return ThemesListArray;
+    }
+
+    public MainActivity setThemesListArray(List<ThemesConference> themesListArray) {
+        ThemesListArray = themesListArray;
         return this;
     }
 }

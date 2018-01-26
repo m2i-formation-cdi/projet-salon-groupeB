@@ -40,6 +40,29 @@ public class ConferenceArrayAdapter extends ArrayAdapter<Conference> {
 
         TextView textViewMesConf = view.findViewById(R.id.textViewMesConferences);
 
+        /**TextView textView = view.findViewById(R.id.ListTextItemConferenceStatut);
+        //Rcupération de l'image du statut
+        ImageView imageViewStatutConference = view.findViewById(R.id.imageViewStatutConference);
+
+        String etatConference = "";
+
+        if(currentConference.getStatut() == null) {
+            imageViewStatutConference.setImageResource(R.mipmap.wait);
+        } else if(currentConference.getStatut().equals("0")){
+            imageViewStatutConference.setImageResource(R.mipmap.delete);
+        }else if(currentConference.getStatut().equals("1")){
+            //etatConference = "Validé";
+            imageViewStatutConference.setImageResource(R.mipmap.check);
+        }
+
+        textView.setText(
+                currentConference.getTitle() + " " + etatConference
+        );*/
+
+        textViewMesConf.setText(
+                currentConference.getTitle()
+        );
+
         return view;
     }
 

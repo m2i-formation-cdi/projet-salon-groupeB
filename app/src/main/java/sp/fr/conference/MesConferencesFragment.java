@@ -37,7 +37,7 @@ public class MesConferencesFragment extends Fragment implements View.OnClickList
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference conferenceReference;
-    private List<Conference> conferenceList;
+    private List<Conference> ConferenceList;
     private ListView conferenceListView;
     private ConferenceArrayAdapter adapter;
     private ImageView changeButton, deleteButton, addNewConfButton;
@@ -59,27 +59,27 @@ public class MesConferencesFragment extends Fragment implements View.OnClickList
 
         //Récupération de la listView et des images
         conferenceListView = view.findViewById(R.id.userConferenceListViewItem);
-
+        ConferenceList = new ArrayList<>();
         changeButton = view.findViewById(R.id.changeButton);
         deleteButton = view.findViewById(R.id.deleteButton);
         addNewConfButton = view.findViewById(R.id.addNewConfButton);
 
-        //Gestion des suppression, modification ou ajout au clic d'un bouton
+        /**Gestion des suppression, modification ou ajout au clic d'un bouton
         changeButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
-        addNewConfButton.setOnClickListener(this);
+        addNewConfButton.setOnClickListener(this);*/
 
         conferenceListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long l) {
                 Conference item = (Conference) parent.getItemAtPosition(position);
+
             }
         });
 
-        conferenceList = new ArrayList<>();
 
         //Instanciation de la liste
-        adapter = new ConferenceArrayAdapter(this.getActivity(),R.layout.fragment_mes_conferences, conferenceList);
+        adapter = new ConferenceArrayAdapter(this.getActivity(),R.layout.fragment_mes_conferences, ConferenceList);
         conferenceListView.setAdapter(adapter);
 
 
@@ -87,7 +87,7 @@ public class MesConferencesFragment extends Fragment implements View.OnClickList
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //Réinitialisation de la liste
-                conferenceList.clear();
+                ConferenceList.clear();
 
                 //Boucle sur l'ensemble des noeuds
                 for (DataSnapshot conferenceSnapshot : dataSnapshot.getChildren()){
@@ -98,7 +98,7 @@ public class MesConferencesFragment extends Fragment implements View.OnClickList
                     String title = conferenceSnapshot.getChildren().toString();
 
                     //Ajout de la conference à la liste
-                    conferenceList.add(userConf);
+                    ConferenceList.add(userConf);
                 }
 
                 adapter.notifyDataSetChanged();
@@ -116,18 +116,18 @@ public class MesConferencesFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View view) {
 
-        if(view.getId() == R.id.deleteButton) {
+       /** if(view.getId() == R.id.deleteButton) {
            //A MODIFIER CF BDD SI VALIDER=1 SINON=0
             Toast.makeText(getActivity(), "Conference supprimer de ma liste", Toast.LENGTH_SHORT).show();
         }
         else if(view.getId() == R.id.changeButton){
-            navigateToFragment(new ConferenceInformation());
+            navigateToFragment(new PropConference());
             Toast.makeText(getActivity(), "Redirection sur ConferenceInformation", Toast.LENGTH_SHORT).show();
         }
         else if(view.getId() == R.id.addNewConfButton){
             navigateToFragment(new PropConference());
             Toast.makeText(getActivity(), "Redirection sur PropConference", Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
     }
 

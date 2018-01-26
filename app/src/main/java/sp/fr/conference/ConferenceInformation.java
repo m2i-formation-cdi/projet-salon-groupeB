@@ -113,7 +113,6 @@ public class ConferenceInformation extends Fragment {
             //}
 
 
-                // se lance une fois que le createView a fini
                // adapter.notifyDataSetChanged();
 
             @Override

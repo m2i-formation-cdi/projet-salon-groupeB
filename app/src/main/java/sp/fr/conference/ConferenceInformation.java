@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ import java.util.List;
 
 import sp.fr.conference.model.Conference;
 import sp.fr.conference.model.ThemesConference;
+import sp.fr.conference.model.User;
 
 
 /**
@@ -37,6 +39,7 @@ public class ConferenceInformation extends Fragment {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference conferenceReference;
     private DatabaseReference speakerReference;
+    private DatabaseReference userReference;
     private DatabaseReference themeReference;
     private TextView titleConference;
     private TextView themeConference;
@@ -47,8 +50,9 @@ public class ConferenceInformation extends Fragment {
     private TextView endHour;
     private TextView adress;
     private TextView description;
-    private List<Conference> conferencesList = new ArrayList<>();
-  //  private ConferenceAdapter adapter;
+    private List<User> userList = new ArrayList<>();
+    private ListView userListView;
+    private UserArrayAdapter adapter;
     private TextView themeTextView;
 
 
@@ -85,35 +89,28 @@ public class ConferenceInformation extends Fragment {
         description = view.findViewById(R.id.descriptionTextView);
 
 
-
         //Récupération valeurs
         conferenceReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //for (DataSnapshot conferenceSnapshot : dataSnapshot.getChildren()) {
 
-                   String confKey = dataSnapshot.getKey();
-                    Log.i("KEY", dataSnapshot.getKey());
+                String confKey = dataSnapshot.getKey();
+                Log.i("KEY", dataSnapshot.getKey());
 
-                        Conference conference = dataSnapshot.getValue(Conference.class);
-                        titleConference.setText(conference.getTitle());
-                        themeConference.setText(conference.getTheme().getName());
-                        speakerName.setText(conference.getSpeaker().getName());
-                        speakerFirstName.setText(conference.getSpeaker().getFirstName());
-                        dateConference.setText(conference.getDay());
-                        startHour.setText(conference.getStartHour());
-                        endHour.setText(conference.getEndHour());
-                        adress.setText(conference.getLocation());
-                        description.setText(conference.getDescription());
+                Conference conference = dataSnapshot.getValue(Conference.class);
+                titleConference.setText(conference.getTitle());
+                themeConference.setText(conference.getTheme().getName());
+                speakerName.setText(conference.getSpeaker().getName());
+                speakerFirstName.setText(conference.getSpeaker().getFirstName());
+                dateConference.setText(conference.getDay());
+                startHour.setText(conference.getStartHour());
+                endHour.setText(conference.getEndHour());
+                adress.setText(conference.getLocation());
+                description.setText(conference.getDescription());
 
-                       Log.i("TITLE", conference.getTitle());
-                     // Log.i("THEME", conference.getTheme().getName());
-                  }
-
-            //}
-
-
-               // adapter.notifyDataSetChanged();
+                Log.i("TITLE", conference.getTitle());
+                // Log.i("THEME", conference.getTheme().getName());
+            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -121,53 +118,65 @@ public class ConferenceInformation extends Fragment {
             }
         });
 
+        userReference = firebaseDatabase.getReference().child("conference").child(key).child("attendants");
+        userListView = view.findViewById(R.id.userListView);
+
+        // Récupération valeurs
+        userReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                 String confKey = userSnapshot.getKey();
+                 Log.i("KEY ATTENDANT", userSnapshot.getKey());
+                 User attendant = userSnapshot.getValue(User.class);
+                 Log.i("NAME ATTENDANT", attendant.getName());
+                 userList.add(attendant);
+            }
+
+            adapter.notifyDataSetChanged();
+        }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         // Création de l'Adapter pour récupérer les données vers l'Adapter
-        //adapter = new ConferenceAdapter(this.getActivity(), R.layout.fragment_conference, conferencesList);
-        //titleConference.setAdapter(adapter);
+        adapter = new UserArrayAdapter(this.getActivity(), R.layout.user_list_item, userList);
+        userListView.setAdapter(adapter);
 
         return view;
     }
 
 
-/*
     // Envoi des données de l'Adapter vers la vue
-    private class ConferenceAdapter extends ArrayAdapter<Conference> {
+    private class UserArrayAdapter extends ArrayAdapter<User> {
 
         private Activity context;
         private int resource;
-        private List<Conference> data;
+        private List<User> data;
 
-        public ConferenceAdapter(@NonNull Activity context, int resource, @NonNull List<Conference> objects) {
+        public UserArrayAdapter(@NonNull Activity context, int resource, @NonNull List<User> objects) {
             super(context, resource, objects);
+/*
+            Log.i("ARRAY", "----------------------t'es dans l'array---------de mon cul-------------");
 
             this.context = context;
             this.resource = resource;
-            this.data = objects;
+            this.data = objects;*/
         }
 
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            View view = this.context.getLayoutInflater().inflate(R.layout.theme_list_item, parent, false);
+            View view = getActivity().getLayoutInflater().inflate(R.layout.user_list_item, parent, false);
 
-            Conference item = this.data.get(position);
-            TextView themeTextView = view.findViewById(R.id.themeSpinnerTextView);
-            themeTextView.setText(item.getName());
+            User item = userList.get(position);
+            TextView userTextView = view.findViewById(R.id.userListItem);
+            userTextView.setText(item.getName());
+            Log.i("USER NAME", item.getName());
             return view;
         }
-
-        @Override
-        public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            View view = this.context.getLayoutInflater().inflate(R.layout.theme_list_item, parent, false);
-
-            ThemesConference item = this.data.get(position);
-            themeTextView = view.findViewById(R.id.themeSpinnerTextView);
-            themeTextView.setText(item.getName());
-            return view;
-        }
-*/
-
-
-
+    }
 }

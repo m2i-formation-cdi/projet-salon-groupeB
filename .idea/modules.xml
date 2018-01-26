@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\Formation.M2I-JAV5-04\Desktop\android_supports\projet-salon-groupeB\Conference.iml" filepath="C:\Users\Formation.M2I-JAV5-04\Desktop\android_supports\projet-salon-groupeB\Conference.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/projet-salon-groupeB.iml" filepath="$PROJECT_DIR$/projet-salon-groupeB.iml" />
     </modules>

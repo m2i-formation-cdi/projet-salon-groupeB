@@ -5,7 +5,7 @@ package sp.fr.conference.model;
  * Created by sebas on 22/01/2018.
  */
 
-public class ThemesConference {
+public class ThemesConference{
 
     private String name;
     private String id;
@@ -25,7 +25,8 @@ public class ThemesConference {
 
     public void setName(String name) {
 
-        this.name = name;
+            this.name = name;
+
     }
 
     public String getId() {
@@ -33,7 +34,8 @@ public class ThemesConference {
     }
 
     public ThemesConference setId(String id) {
-        this.id = id;
+
+            this.id = id;
         return this;
     }
 }

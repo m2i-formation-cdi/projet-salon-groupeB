@@ -133,7 +133,7 @@ public class PropConference extends Fragment {
                 conference.setTitle(titleConference);
                 speaker.setName(speakerName);
                 speaker.setFirstName(speakerFirstName);
-                conference.setUser(speaker);
+                conference.setSpeaker(speaker);
                 themeConf.setName(themeReferenceText);
                 //themeConf.setName((String) themeTextView.getText());
                 //themeConf.setId();

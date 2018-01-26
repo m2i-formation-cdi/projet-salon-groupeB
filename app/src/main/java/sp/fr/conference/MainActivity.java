@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             navigateToFragment(new PropConference());
         } else if (id == R.id.nav_gallery) {
-
+            navigateToFragment(new ConferenceInformation());
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {

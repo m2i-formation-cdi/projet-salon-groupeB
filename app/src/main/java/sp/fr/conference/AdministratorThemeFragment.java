@@ -114,34 +114,7 @@ public class AdministratorThemeFragment extends Fragment  implements View.OnClic
         adapter = new ThemeArrayAdapter(this.getActivity(), R.layout.theme_list_items , ThemesList);
         themesListView.setAdapter(adapter);
 
-        themeReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //Réinitialisation de la liste
-                ThemesList.clear();
 
-                //Boucle sur l'ensemble des noeuds
-                for(DataSnapshot themeSnapshot : dataSnapshot.getChildren()) {
-
-                    //Création d'une instance de theme et hydratation avec les données du snapshot
-                    ThemesConference themeConf = (ThemesConference)themeSnapshot.getValue(ThemesConference.class);
-
-                    String name = themeSnapshot.getChildren().toString();
-
-                    //Ajout du theme à la liste
-                    ThemesList.add(themeConf);
-
-
-                }
-
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
         return view;
     }

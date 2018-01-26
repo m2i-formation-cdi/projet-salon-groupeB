@@ -61,9 +61,9 @@ public class AdministratorListingConferenceStatutFragment extends Fragment {
                 Conference item = (Conference) parent.getItemAtPosition(position);
 
 
-
                 MainActivity activity = (MainActivity) getActivity();
-                MainActivity key =  activity.setKey( item.getId() );
+                MainActivity obj =  activity.setObj( item );
+
 
                 navigateToFragment( new AdministratorGestionConferenceFragment() );
 

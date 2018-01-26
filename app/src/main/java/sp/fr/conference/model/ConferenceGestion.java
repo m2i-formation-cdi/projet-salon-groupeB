@@ -9,13 +9,13 @@ public class ConferenceGestion {
     private String startHour;
     private String endHour;
     private String Location;
-    private String date;
+    private String day;
 
     public ConferenceGestion(String startHour, String endHour, String location, String date) {
         this.startHour = startHour;
         this.endHour = endHour;
         Location = location;
-        this.date = date;
+        this.day = date;
     }
 
     public String getStartHour() {
@@ -46,11 +46,11 @@ public class ConferenceGestion {
     }
 
     public String getDate() {
-        return date;
+        return day;
     }
 
     public ConferenceGestion setDate(String date) {
-        this.date = date;
+        this.day = date;
         return this;
     }
 }

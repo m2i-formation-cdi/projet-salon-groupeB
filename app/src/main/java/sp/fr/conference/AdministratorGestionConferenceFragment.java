@@ -40,10 +40,10 @@ public class AdministratorGestionConferenceFragment extends Fragment {
 
     private String dateDebut, dateFin, lieux;
 
-    private String key;
     private String name;
     private String description;
     private List<Conference> ConferenceList;
+    private Conference obj;
     private ConferenceArrayAdapter adapter;
     private boolean isValide = false;
 
@@ -60,11 +60,14 @@ public class AdministratorGestionConferenceFragment extends Fragment {
 
         //récupération de la key
         MainActivity activity = (MainActivity) getActivity();
-        key = activity.getKey();
+        obj = activity.getObj();
+
+        //Conference conf = new Conference(key);
 
         //Préparation de la base de données
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        conferenceReference = firebaseDatabase.getReference().child("conference").child(key);
+//        firebaseDatabase = FirebaseDatabase.getInstance();
+//        conferenceReference = firebaseDatabase.getReference().child("conference");
+
 
         //récupération des composants
         affichageNomConference = view.findViewById(R.id.textViexName);

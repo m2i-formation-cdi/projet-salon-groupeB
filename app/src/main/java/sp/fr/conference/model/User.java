@@ -6,28 +6,18 @@ package sp.fr.conference.model;
 
 public class User {
 
-    private String firstName;
     private String name;
     private String mail;
-    private Double id;
+    private String id;
 
     public User() {
     }
 
-    public User(String firstName, String name, String mail) {
-        this.firstName = firstName;
+    public User(String name, String mail) {
         this.name = name;
         this.mail = mail;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public User setFirstName(String firstName) {
-        this.firstName = firstName;
-        return this;
-    }
 
     public String getName() {
         return name;
@@ -47,11 +37,11 @@ public class User {
         return this;
     }
 
-    public Double getId() {
+    public String getId() {
         return id;
     }
 
-    public User setId(Double id) {
+    public User setId(String id) {
         this.id = id;
         return this;
     }

@@ -21,13 +21,21 @@ public class Conference {
     private User speaker;
     private Comments comments;
 
-    public Conference(String title, ThemesConference theme, String description, User user, String id, String statut) {
+    public Conference(String title, ThemesConference theme, String description, User attendents, String id, String statut, String day, String startHour, String endHour, String location, String latitude, String longitude, User speaker, Comments comments) {
         this.title = title;
         this.theme = theme;
         this.description = description;
-        this.attendents = user;
+        this.attendents = attendents;
         this.id = id;
         this.statut = statut;
+        this.day = day;
+        this.startHour = startHour;
+        this.endHour = endHour;
+        this.location = location;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.speaker = speaker;
+        this.comments = comments;
     }
 
     public Conference() {

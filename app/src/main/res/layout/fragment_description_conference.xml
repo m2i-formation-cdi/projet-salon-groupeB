@@ -96,10 +96,10 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/descriptionAuthentifier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible"
             android:weightSum="50">
 
             <EditText
@@ -130,9 +130,11 @@
 
         <Button
             android:id="@+id/btParticiperDescription"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Participer" />
+            android:onClick="btParticiple"
+            android:text="Participer"
+             />
 
 
     </LinearLayout>

@@ -23,13 +23,13 @@
             android:id="@+id/myConference"
             android:icon="@mipmap/search"
             android:title="Mes conférences" />
-
+        <item
+            android:id="@+id/administrator"
+            android:icon="@mipmap/ic_launcher_round"
+            android:title="Administrateur" />
+        <item
+            android:id="@+id/themeDescription"
+            android:icon="@android:color/holo_blue_dark"
+            android:title="TestDescription" />
     </group>
-
-    <item
-        android:id="@+id/themeDescription"
-        android:icon="@mipmap/ic_launcher_round"
-        android:title="Administrateur" />
-    <item android:title="TestDescription" />
-
 </menu>

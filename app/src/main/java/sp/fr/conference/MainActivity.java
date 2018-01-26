@@ -41,6 +41,24 @@ public class MainActivity extends AppCompatActivity
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private FirebaseUser fbUser;
+    private Boolean isConnected =false;
+    private Boolean isParticipeted =false;
+
+    public Boolean getParticipeted() {
+        return isParticipeted;
+    }
+
+    public void setParticipeted(Boolean participeted) {
+        isParticipeted = participeted;
+    }
+
+    public Boolean getConnected() {
+        return isConnected;
+    }
+
+    public void setConnected(Boolean connected) {
+        isConnected = connected;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,16 +126,17 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Toast.makeText(this,"id"+id,Toast.LENGTH_SHORT).show();
 
         if (id == R.id.login) {
-            //
+            // Handle the camera action
         } else if (id == R.id.logOut) {
-            //
+
         } else if (id == R.id.listinfConference) {
-            //
+
         } else if (id == R.id.myConference) {
-            //
+
+        } else if (id == R.id.administrator) {
+            //navigateToFragment( new AdministratorFragment() );
         } else if (id == R.id.themeDescription){
             navigateToFragment(new DescriptionConferenceFragment());
         }
@@ -148,6 +167,7 @@ public class MainActivity extends AppCompatActivity
 
     //Lancement de la procedure d'authentification
     public void onLogin(MenuItem item) {
+        Toast.makeText(this,"item = "+item,Toast.LENGTH_LONG).show();
         //Définir des fournisseurs d'authentification
         List<AuthUI.IdpConfig> providers =  new ArrayList<>();
         providers.add(
@@ -192,6 +212,8 @@ public class MainActivity extends AppCompatActivity
                 navigationView.getMenu().findItem(R.id.login).setVisible(false);
                 //Affichage du lien LogOut
                 navigationView.getMenu().findItem(R.id.logOut).setVisible(true);
+                isConnected = true;
+
 
             }else {
                 if(response != null){
@@ -213,19 +235,36 @@ public class MainActivity extends AppCompatActivity
                         //Masquage du lien LogOut
                         navigationView.getMenu().findItem(R.id.logOut).setVisible(false);
 
+
                         //Vider les infos utilisateurs dans l'en tête
                         userNameTextView.setText("");
                         userEmailTextView.setText("");
 
                         fbUser = null;
+                        isConnected = false;
 
 
                         drawer.closeDrawer(GravityCompat.START);
                     }
                 }
-        );
 
+        );
     }
+    public void btParticiple(View view) {
+        if(isConnected){
+            isParticipeted= true;
+            Toast.makeText(this,"valeur"+isParticipeted,Toast.LENGTH_LONG).show();
+        }else {
+
+           Toast.makeText(this,"Veuillez vous connecter",Toast.LENGTH_LONG).show();
+           drawer.openDrawer(navigationView);
+
+
+        }
+    }
+
+
+
 }
 
 

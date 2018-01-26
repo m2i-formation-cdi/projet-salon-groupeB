@@ -28,6 +28,7 @@ import java.util.List;
 
 import sp.fr.conference.model.Conference;
 import sp.fr.conference.model.ConferenceArrayAdapter;
+import sp.fr.conference.model.User;
 
 
 /**
@@ -36,12 +37,13 @@ import sp.fr.conference.model.ConferenceArrayAdapter;
 public class MesConferencesFragment extends Fragment implements View.OnClickListener{
 
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference conferenceReference;
+    private DatabaseReference conferenceReference, attendantsReference;
     private List<Conference> ConferenceList;
     private ListView conferenceListView;
     private ConferenceArrayAdapter adapter;
     private ImageView changeButton, deleteButton, addNewConfButton;
 
+    private User currentUser = new User();
 
     public MesConferencesFragment() {
         // Required empty public constructor
@@ -56,13 +58,14 @@ public class MesConferencesFragment extends Fragment implements View.OnClickList
         //Préparation de la base de données
         firebaseDatabase = FirebaseDatabase.getInstance();
         conferenceReference = firebaseDatabase.getReference().child("conference");
+        attendantsReference = firebaseDatabase.getReference().child("conference").child("attendants");
 
         //Récupération de la listView et des images
         conferenceListView = view.findViewById(R.id.userConferenceListViewItem);
         ConferenceList = new ArrayList<>();
-        changeButton = view.findViewById(R.id.changeButton);
+        /**changeButton = view.findViewById(R.id.changeButton);
         deleteButton = view.findViewById(R.id.deleteButton);
-        addNewConfButton = view.findViewById(R.id.addNewConfButton);
+        addNewConfButton = view.findViewById(R.id.addNewConfButton);*/
 
         /**Gestion des suppression, modification ou ajout au clic d'un bouton
         changeButton.setOnClickListener(this);
